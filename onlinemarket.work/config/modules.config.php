@@ -11,12 +11,24 @@
  * This should be an array of module namespaces used in the application.
  */
 return [
+    'Zend\Paginator',
+    'Zend\Session',
+    'Zend\I18n',
+    'Zend\Form',
+    'Zend\Hydrator',
+    'Zend\InputFilter',
+    'Zend\Filter',
+    'Zend\Db',
+    'Zend\Cache',
     'Zend\Log',
     'Zend\Navigation',
     'Zend\Mvc\Plugin\FlashMessenger',
     'Zend\Router',
     'Zend\Validator',
     'Zend\Mail',
+    'ZendDeveloperTools',
+    'DoctrineModule',
+    'DoctrineORMModule',
     'Application',
     'Market',
     'Model',
@@ -31,7 +43,7 @@ return [
     'Logging',
     'Notification',
     //*** DOCTRINE LAB
-    //'MyDoctrine',
+    'MyDoctrine',
     //*** BLOCK CIPHER LAB
     //'PrivateMessages',
     //*** ENCRYPTION LAB

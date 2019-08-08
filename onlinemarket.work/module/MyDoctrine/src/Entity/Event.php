@@ -1,5 +1,4 @@
 <?php
-//*** DOCTRINE LAB: this class is completed already for your reference
 namespace MyDoctrine\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;

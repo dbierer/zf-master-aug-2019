@@ -1,7 +1,7 @@
 <?php
-//*** DOCTRINE LAB: see hints below
 namespace MyDoctrine\Controller;
 
+use MyDoctrine\Model\ {EventTable, RegistrationTable, AttendeeTable};
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Filter;
@@ -18,7 +18,7 @@ class SignupController extends AbstractActionController implements RepoAwareInte
         if ($eventId) {
             return $this->eventSignup($eventId);
         }
-        //*** DOCTRINE LAB: use event repo to find all
+        //*** find all events
         $events = $this->eventRepo->findAll();
         return new ViewModel(array('events' => $events));
     }
@@ -30,7 +30,7 @@ class SignupController extends AbstractActionController implements RepoAwareInte
 
     protected function eventSignup($eventId)
     {
-        //*** DOCTRINE LAB: use event repo to find by event ID
+        //*** find a specific event
         $event = $this->eventRepo->findById($eventId);
         if (!$event) {
             return $this->notFoundAction();
@@ -48,16 +48,15 @@ class SignupController extends AbstractActionController implements RepoAwareInte
     protected function processForm(array $formData, $event)
     {
         $formData = $this->sanitizeData($formData);
-        //*** DOCTRINE LAB: use registration repo to save
-        $reg = ???;
-        //*** DOCTRINE LAB: set the new registration back into the related event + save
-        ???
+        //*** save the registration
+        $reg = $this->registrationRepo->persist($event, $formData);
+        $event->setRegistrations($reg);
+        $this->eventRepo->save($event);
         //*** save all attendees for this registration
         foreach ($formData['ticket'] as $nameOnTicket) {
-            //*** DOCTRINE LAB: use attendo repo to save each attendee
-            ???
-            //*** DOCTRINE LAB: append attendee to current registration
-            ???
+            $attendee = $this->attendeeRepo->persist($reg, $nameOnTicket);
+            $reg->setAttendees($attendee);
+            $this->registrationRepo->update($reg);
         }
         return true;
     }

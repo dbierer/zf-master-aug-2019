@@ -1,22 +1,19 @@
 <?php
 namespace MyDoctrine\Entity;
 
-//*** DOCTRINE LAB:
 //*** need "use" statement
 use Doctrine\ORM\Mapping as ORM;
 
-//*** DOCTRINE LAB:
 //*** need entity annotation
 /**
- * @ORM\Entity(???)
+ * @ORM\Entity("MyDoctrine\Entity\Attendee")
  * @ORM\Table("attendee_d")
  */
 class Attendee
 {
-    //*** DOCTRINE LAB:
     //*** need annotations for each property
     /**
-     * @ORM\???
+     * @ORM\Column(type="integer", length=11)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -24,7 +21,7 @@ class Attendee
 
     //*** configure a many to one relationship to to Registration
     /**
-     * @ORM\???
+     * @ORM\ManyToOne(targetEntity="MyDoctrine\Entity\Registration", inversedBy="attendees")
      */
     protected $registration;
 

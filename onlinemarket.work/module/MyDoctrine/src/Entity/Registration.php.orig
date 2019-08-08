@@ -126,7 +126,6 @@ class Registration
         $this->registrationTime = $registrationTime;
     }
 
-    //*** needs annotation
     /**
      * @param multitype: $attendees
      */
@@ -142,5 +141,8 @@ class Registration
         $this->event = $event;
     }
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> fac17ba67da2bd01350c87fba522a9b309b13e7b
 }

@@ -1,5 +1,4 @@
 <?php
-//*** DOCTRINE LAB: this interface is completed already for your reference
 namespace MyDoctrine\Controller;
 
 use MyDoctrine\Repository\ {EventRepo, AttendeeRepo, RegistrationRepo};

@@ -47,7 +47,7 @@ return [
 
                 // directory where proxies will be stored. By default, this is in
                 // the `data` directory of your application
-                'proxy_dir'         => __DIR__ . '/../../data/DoctrineORMModule/Proxy',
+                'proxy_dir'         => __DIR__ . '/../../data/proxy',
 
                 // namespace for generated proxy classes
                 'proxy_namespace'   => 'DoctrineORMModule\Proxy',

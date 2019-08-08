@@ -1,14 +1,13 @@
 <?php
 namespace MyDoctrine\Repository;
 
-//*** DOCTRINE LAB:
 //*** need "use" statements
+use Doctrine\ORM\EntityRepository;
 use MyDoctrine\Entity\ {Registration, Event};
 
 class RegistrationRepo extends EntityRepository
 {
 
-    //*** DOCTRINE LAB:
     /**
      * @param Application\Entity\Event $eventEntity
      * @param array $regData
@@ -16,9 +15,12 @@ class RegistrationRepo extends EntityRepository
      */
     public function persist(Event $eventEntity, $regData)
     {
-        //*** DOCTRINE LAB: complete registration persist
         $registration = new Registration();
-        return ???;
+        $registration->setFirstName($regData['firstName']);
+        $registration->setLastName($regData['lastName']);
+        $registration->setRegistrationTime(new \DateTime('now'));
+        $registration->setEvent($eventEntity);
+        return $this->update($registration);
     }
     public function update($registration)
     {

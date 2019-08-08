@@ -1,8 +1,8 @@
 <?php
 namespace MyDoctrine\Repository;
 
-//*** DOCTRINE LAB:
 //*** need "use" statements
+use Doctrine\ORM\EntityRepository;
 use MyDoctrine\Entity\Attendee;
 
 class AttendeeRepo extends EntityRepository
@@ -15,13 +15,14 @@ class AttendeeRepo extends EntityRepository
      */
     public function persist($regEntity, $nameOnTicket)
     {
-        //*** DOCTRINE LAB:
+        //*** need code to save to the database
         $attendee = new Attendee();
         $attendee->setRegistration($regEntity);
         $attendee->setName($nameOnTicket);
         $em = $this->getEntityManager();
-        //*** need code to save to the database
+        $em->persist($attendee);
         //*** don't forget to flush!!!
+        $em->flush();
         return $attendee;
     }
 }

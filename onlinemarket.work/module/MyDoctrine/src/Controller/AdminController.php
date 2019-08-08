@@ -1,7 +1,7 @@
 <?php
-//*** DOCTRINE LAB: see hints below
 namespace MyDoctrine\Controller;
 
+use MyDoctrine\Model\ {EventTable, RegistrationTable, AttendeeTable};
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -15,16 +15,14 @@ class AdminController extends AbstractActionController implements RepoAwareInter
         if ($eventId) {
             return $this->listRegistrations($eventId);
         }
-        //*** DOCTRINE LAB: use event repo to find all
-        $events = ???;
+        $events = $this->eventRepo->findAll();
         $viewModel = new ViewModel(array('events' => $events));
         return $viewModel;
     }
 
     protected function listRegistrations($eventId)
     {
-        //*** DOCTRINE LAB: use event repo to find by event ID
-        $event = ???;
+        $event = $this->eventRepo->findById($eventId);
         $viewModel = new ViewModel(array('event' => $event));
         $viewModel->setTemplate('my-doctrine/admin/list.phtml');
         return $viewModel;

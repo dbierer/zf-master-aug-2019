@@ -34,7 +34,9 @@
         "zendframework/zend-navigation": "^2.8",
         "zendframework/zend-log": "^2.9",
         "firephp/firephp-core": "^0.4.0",
-        "zendframework/zend-authentication": "^2.6"
+        "zendframework/zend-authentication": "^2.6",
+	"doctrine/orm" : "^2.6",
+	"doctrine/doctrine-orm-module" : "*"
     },
     "autoload": {
         "psr-4": {
@@ -50,7 +52,8 @@
             "AccessControl\\" : "module/AccessControl/src/",
             "PhpSession\\" : "module/PhpSession/src/",
             "Notification\\" : "module/Notification/src/",
-            "Logging\\": "module/Logging/src/"
+            "Logging\\": "module/Logging/src/",
+            "MyDoctrine\\" : "module/MyDoctrine/src/"
         }
     },
     "autoload-dev": {
