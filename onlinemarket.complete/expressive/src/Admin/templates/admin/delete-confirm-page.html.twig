@@ -1,0 +1,28 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}Status{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Online Market Delete Status</h2>
+        <hr>
+        <table style="width:100%;">
+        <tr><th>Title</th></tr>
+        {% for entry in response %}
+            <tr>
+            <td>{{ title }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        {% if success == 1 %}
+            <h2>Status</h2>
+            <p>Item deleted successfully</p>
+        {% endif %}
+        {% if success == -1 %}
+            <h2>Status</h2>
+            <p>Unable to delete this item</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

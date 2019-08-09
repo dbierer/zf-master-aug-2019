@@ -1,0 +1,24 @@
+{% extends '@layout/default.html.twig' %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+    {% set confirm = '' %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Online Market List</h2>
+            <hr>
+            <table style="width:100%;">
+            <tr><th>ID</th><th>Title</th><th>Date</th><th>&nbsp;</th></tr>
+            {% for entry in response %}
+                <tr>
+                <td>{{ entry.listings_id }}</td>
+                <td>{{ entry.title }}</td>
+                <td>{{ entry.date_created }}</td>
+                <td><a href="/admin/delete?id={{ entry.listings_id }}&del=1">DELETE</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}
