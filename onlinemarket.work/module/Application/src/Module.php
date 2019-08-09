@@ -8,6 +8,7 @@
 namespace Application;
 
 
+use Application\Listener\Whatever;
 use Zend\Mvc\MvcEvent;
 
 class Module
@@ -21,11 +22,17 @@ class Module
 
 	public function onBootstrap(\Zend\Mvc\MvcEvent $e) 
 	{
+		$container = $e->getApplication()->getServiceManager();
         $shared = $e->getApplication()->getEventManager()->getSharedManager();
         $shared->attach(
             'IDENTIFIER_DB', 
             'EVENT_DB_MOD', 
             [$this, 'someListener'], 
+            100);
+        $shared->attach(
+            '*', 
+            MvcEvent::EVENT_DISPATCH,
+            [$container->get(Whatever::class), 'doThis'], 
             100);
     }
     public function someListener($e) 

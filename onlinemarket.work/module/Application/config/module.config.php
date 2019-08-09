@@ -39,6 +39,9 @@ return [
         'abstract_factories' => [
             NavigationAbstractServiceFactory::class
         ],
+        'factories' => [
+			Listener\Whatever::class  => InvokableFactory::class,
+		],
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
