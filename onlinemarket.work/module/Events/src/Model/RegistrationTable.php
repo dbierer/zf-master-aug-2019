@@ -76,13 +76,16 @@ class RegistrationTable extends Base
         $final[$regId] = $regEntity;
     }
 
+    //*** DELEGATING HYDRATOR LAB: use the Zend\Hydrator\DelegatingHydrator to extract data instead of the one currently used
     public function save(Registration $reg)
     {
-        $hydrator = $this->tableGateway->getResultSetPrototype()->getHydrator();
-        $data = $hydrator->extract($reg);
+        //$hydrator = $this->tableGateway->getResultSetPrototype()->getHydrator();
+        $data = $this->hydroDelegator->extract($reg);
         // need to get rid of this property as it's not a column in the "registration" table
         unset($data['attendees']);
+        //*** LOG LAB: log if data is saved OK or not
         $this->tableGateway->insert($data);
+        //*** EVENTMANAGER LISTENER AGGREGATE LAB: trigger a modification event
         $message = $reg->event_id . ':' . $reg->first_name . ' ' . $reg->last_name;
         $this->eventManager->trigger(RegEvent::MOD_EVENT, $this, ['registration' => $message]);
         return $this->tableGateway->getLastInsertValue();

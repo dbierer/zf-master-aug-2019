@@ -1,9 +1,11 @@
 <?php
 namespace Logging;
 
-use Zend\Mvc\ {MvcEvent};
+use Logging\Logger\Logging;
+use Logging\Logger\Factory\ {LoggerFactory,ListenerFactory};
 use Zend\Log\Logger;
-use Zend\Log\Writer\ {Stream, FirePhp};
+use Zend\Mvc\ {MvcEvent};
+use Zend\ServiceManager\Proxy\LazyServiceFactory;
 
 class Module
 {
@@ -21,7 +23,7 @@ class Module
 
     public function setLogService(MvcEvent $e)
     {
-        $logger = $e->getApplication()->getServiceManager()->get('logging-logger');
+        $logger = $e->getApplication()->getServiceManager()->get(Logging::class);
         Logger::registerErrorHandler($logger);
         Logger::registerExceptionHandler($logger);
     }
@@ -30,19 +32,19 @@ class Module
     {
         return [
             'factories' => [
-                'logging-logger' => function ($container) {
-                    $writerStream = new Stream($container->get('logging-error-log-filename'));
-                    $writerFirePhp = new FirePhp();
-                    $logger = new Logger();
-                    $logger->addWriter($writerStream);
-                    $logger->addWriter($writerFirePhp);
-                    return $logger;
-                },
+                Logging::class => LoggerFactory::class,
                 //*** DATABASE EVENTS LAB: inject database adapter platform into constructor for "logging-listener"
-                Listener::class => function ($container) {
-					return new Listener($container->get('logging-logger'));
-                },
+                Listener::class => ListenerFactory::class,
             ],
+            'delegators' => [
+				//Logging::class => LazyServiceFactory::class,
+			],
+			'lazy_services' => [
+				'class_map' => [Logging::class => Logging::class],
+				'proxies_target_dir' => __DIR__ . '/../../../data/proxy',
+				'proxies_namespace' => 'LoggerProxy',
+				'write_proxy_files' => TRUE,
+			],
         ];
     }
 

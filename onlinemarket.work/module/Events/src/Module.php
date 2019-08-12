@@ -9,6 +9,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Filter;
 use Zend\Navigation\Service\ConstructedNavigationFactory;
 //*** DELEGATING HYDRATOR LAB: add the correct "use" statements
+use Zend\Hydrator\ {HydratorPluginManager, DelegatingHydrator, ClassMethods, ObjectProperty};
 
 class Module
 {

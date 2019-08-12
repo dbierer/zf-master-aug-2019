@@ -5,6 +5,6 @@ class Whatever
 {
 	public function doThis($e)
 	{
-		echo __METHOD__;
+		error_log(__METHOD__);
 	}
 }
