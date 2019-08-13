@@ -26,7 +26,7 @@ return [
     'Zend\Router',
     'Zend\Validator',
     'Zend\Mail',
-    'ZendDeveloperTools',
+    //'ZendDeveloperTools',
     'DoctrineModule',
     'DoctrineORMModule',
     'Application',

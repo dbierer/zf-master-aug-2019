@@ -1,6 +1,7 @@
 <?php
 namespace Events\Listener;
 
+use Logging\Logger\Logging;
 use Interop\Container\ContainerInterface;
 use Zend\EventManager\ {AbstractListenerAggregate,EventManagerInterface,LazyListener};
 
@@ -24,6 +25,7 @@ class Aggregate extends AbstractListenerAggregate
     }
     public function onLog($e)
     {
-        error_log(get_class($e->getTarget()) . ': REGISTRATION ADDED : ' . $e->getParam('registration'));
+		$logger = $this->serviceContainer->get(Logging::class);
+        $logger->info(get_class($e->getTarget()) . ': REGISTRATION ADDED : ' . $e->getParam('registration'));
     }
 }

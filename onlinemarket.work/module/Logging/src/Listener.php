@@ -5,6 +5,7 @@ use Zend\Log\Logger;
 use Zend\EventManager\ {EventManagerInterface, AbstractListenerAggregate};
 
 //*** DATABASE EVENTS LAB: add appropriate "use" statements
+use Zend\Db\TableGateway\Feature\EventFeatureEventsInterface;
 
 class Listener extends AbstractListenerAggregate
 {
@@ -12,9 +13,10 @@ class Listener extends AbstractListenerAggregate
     protected $logger;
     protected $platform;
 	//*** DATABASE EVENTS LAB: add $platform to constructor arguments
-    public function __construct($logger)
+    public function __construct($logger, $platform)
     {
         $this->logger = $logger;
+        $this->platform = $platform;
     }
     public function attach(EventManagerInterface $e, $priority = 100)
     {
@@ -22,10 +24,13 @@ class Listener extends AbstractListenerAggregate
         $shared = $e->getSharedManager();
 		$this->listeners[] = $shared->attach('*', Event::EVENT_SOMETHING, [$this, 'logMessage']);
  		//*** DATABASE EVENTS LAB: complete an "attach()" for INSERT and SELECT table operations
+        $this->listeners[] = $shared->attach('*', EventFeatureEventsInterface::EVENT_PRE_INSERT, [$this, 'logInsert'], $priority);
+        $this->listeners[] = $shared->attach('*', EventFeatureEventsInterface::EVENT_PRE_SELECT, [$this, 'logSelect'], $priority);
     }
+    //*** DATABASE EVENTS LAB: log SQL info when an item is about to be added to the online market
     public function logInsert($e)
     {
-        $this->logger->info(__METHOD__ . ':' . $e->getParam('insert'));
+        $this->logger->info(__METHOD__ . ':' . $e->getParam('insert')->getSqlString($this->platform));
     }
     public function logSelect($e)
     {

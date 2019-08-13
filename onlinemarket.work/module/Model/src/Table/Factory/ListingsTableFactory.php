@@ -8,6 +8,7 @@ use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 //*** DATABASE EVENTS LAB: add appropriate "use" statements
+use Zend\Db\TableGateway\Feature\EventFeature;
 
 class ListingsTableFactory implements FactoryInterface
 {
@@ -23,6 +24,7 @@ class ListingsTableFactory implements FactoryInterface
 
         //*** DATABASE EVENTS LAB: create EventFeature instance using service container to get an EventManager instance
         //*** DATABASE EVENTS LAB: use the EventFeature in ListingsTable creation
-        return new ListingsTable(ListingsTable::TABLE_NAME, $adapter, NULL, $resultSet);
+        $eventFeature = new EventFeature($container->get('EventManager'));
+        return new ListingsTable(ListingsTable::TABLE_NAME, $adapter, $eventFeature, $resultSet);
     }
 }

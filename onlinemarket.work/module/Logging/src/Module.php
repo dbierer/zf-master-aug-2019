@@ -37,7 +37,8 @@ class Module
                 Listener::class => ListenerFactory::class,
             ],
             'delegators' => [
-				//Logging::class => LazyServiceFactory::class,
+				//*** LAZY SERVICES LAB: delegators must be assigned in the form of an array, even if only one!
+				Logging::class => [LazyServiceFactory::class],
 			],
 			'lazy_services' => [
 				'class_map' => [Logging::class => Logging::class],
