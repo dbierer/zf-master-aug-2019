@@ -35,6 +35,10 @@ abstract class AbstractModel implements PropertyInterface
     {
         return $this->properties[$this->normalize($key)] ?? NULL;
     }
+    public function getProperties()
+    {
+        return $this->properties[$this->normalize($key)] ?? NULL;
+    }
     public function setProperty($key, $value)
     {
         $this->properties[$this->normalize($key)] = $value;

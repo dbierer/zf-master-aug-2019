@@ -1,6 +1,7 @@
 <?php
 namespace PrivateMessages\Form\Factory;
 
+use PrivateMessages\Hydrator\FormHydrator;
 use Zend\Hydrator\ClassMethods;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Interop\Container\ContainerInterface;
@@ -14,6 +15,7 @@ class SendFormFactory implements FactoryInterface
         $form = new SendForm('send');
         $form->addElements();
         $form->addInputFilter();
+        $form->setHydrator($container->get(FormHydrator::class));
         return $form;
     }
 }

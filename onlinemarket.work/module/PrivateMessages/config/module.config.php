@@ -40,6 +40,8 @@ return [
         'factories' => [
             Form\Send::class => Form\Factory\SendFormFactory::class,
             Model\MessagesTable::class => Model\Factory\MessagesTableFactory::class,
+            Hydrator\FormHydrator::class => InvokableFactory::class,
+            Hydrator\TableHydrator::class => InvokableFactory::class,
         ],
     ],
     'controllers' => [

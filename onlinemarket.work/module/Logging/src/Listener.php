@@ -24,8 +24,8 @@ class Listener extends AbstractListenerAggregate
         $shared = $e->getSharedManager();
 		$this->listeners[] = $shared->attach('*', Event::EVENT_SOMETHING, [$this, 'logMessage']);
  		//*** DATABASE EVENTS LAB: complete an "attach()" for INSERT and SELECT table operations
-        $this->listeners[] = $shared->attach('*', EventFeatureEventsInterface::EVENT_PRE_INSERT, [$this, 'logInsert'], $priority);
-        $this->listeners[] = $shared->attach('*', EventFeatureEventsInterface::EVENT_PRE_SELECT, [$this, 'logSelect'], $priority);
+        $this->listeners[] = $shared->attach('listings-table', EventFeatureEventsInterface::EVENT_PRE_INSERT, [$this, 'logInsert'], $priority);
+        $this->listeners[] = $shared->attach('listings-table', EventFeatureEventsInterface::EVENT_PRE_SELECT, [$this, 'logSelect'], $priority);
     }
     //*** DATABASE EVENTS LAB: log SQL info when an item is about to be added to the online market
     public function logInsert($e)

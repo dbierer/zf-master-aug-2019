@@ -24,7 +24,9 @@ class ListingsTableFactory implements FactoryInterface
 
         //*** DATABASE EVENTS LAB: create EventFeature instance using service container to get an EventManager instance
         //*** DATABASE EVENTS LAB: use the EventFeature in ListingsTable creation
-        $eventFeature = new EventFeature($container->get('EventManager'));
+        $eventManager = $container->get('EventManager');
+        $eventManager->addIdentifiers(['listings-table']);
+        $eventFeature = new EventFeature($eventManager);
         return new ListingsTable(ListingsTable::TABLE_NAME, $adapter, $eventFeature, $resultSet);
     }
 }

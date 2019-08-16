@@ -45,9 +45,9 @@ return [
     //*** DOCTRINE LAB
     'MyDoctrine',
     //*** BLOCK CIPHER LAB
-    //'PrivateMessages',
+    'PrivateMessages',
     //*** ENCRYPTION LAB
-    // 'Encryption',
+    'Encryption',
     //*** OAUTH LAB
     // 'AuthOauth',
     //*** TRANSLATION LAB

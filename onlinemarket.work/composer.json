@@ -53,7 +53,9 @@
             "PhpSession\\" : "module/PhpSession/src/",
             "Notification\\" : "module/Notification/src/",
             "Logging\\": "module/Logging/src/",
-            "MyDoctrine\\" : "module/MyDoctrine/src/"
+            "MyDoctrine\\" : "module/MyDoctrine/src/",
+            "Encryption\\": "module/Encryption/src/",
+            "PrivateMessages\\": "module/PrivateMessages/src/"
         }
     },
     "autoload-dev": {

@@ -30,7 +30,8 @@ class IndexController extends AbstractActionController
         $from->setAttribute('value', $this->user->getEmail());
         //*** to use this plugin, install it: "composer require zendframework/zend-mvc-plugin-flashmessenger"
         $status = $this->flashMessenger()->getMessages();
-        return $this->setViewModel($this->user, $status);
+        //*** 2019-08-16 DB: removed reference to $this->user in method call
+        return $this->setViewModel($status);
     }
     public function sendAction()
     {
@@ -47,15 +48,17 @@ class IndexController extends AbstractActionController
                     $status = self::SEND_SUCCESS;
                     $this->redirect()->toRoute('messages');
                 } else {
-                    $status = self::SEND_FAIL . '<br>' . implode('<br>', $result->getMessages());
+                    $status = self::SEND_FAIL . '<br>' . implode('<br>', $this->sendForm->getMessages());
                 }
             }
         }
         //*** to use this plugin, install it: "composer require zendframework/zend-mvc-plugin-flashmessenger"
         $this->flashMessenger()->addMessage($status);
-        return $this->setViewModel($this->user, $status);
+        //*** 2019-08-16 DB: removed reference to $this->user in method call
+        return $this->setViewModel($status);
     }
-    protected function setViewModel($this->user, $status)
+	//*** 2019-08-16 DB: removed reference to $this->user in method signature
+    protected function setViewModel($status)
     {
         $htmlStatus = '';
         if ($status) {

@@ -3,7 +3,7 @@ namespace PrivateMessages\Model;
 use Application\Model\AbstractModel;
 class Message extends AbstractModel
 {
-    // maps properties to database columns
+    // maps form fields to database columns
     protected $mapping = [
         'id' => 'id',
         'toEmail' => 'to_email',

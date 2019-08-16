@@ -20,7 +20,8 @@ class Module
             'factories' => [
                 //*** BLOCK CIPHER LAB: return a block cipher instance
                 'encryption-block-cipher' => function ($container) {
-                    $cipher = BlockCipher::factory(???);
+					$config = $container->get('encryption-get-config-array');
+                    $cipher = BlockCipher::factory('openssl', $config);
                     $cipher->setKey($container->get('encryption-key'));
                     return $cipher;
                 },
