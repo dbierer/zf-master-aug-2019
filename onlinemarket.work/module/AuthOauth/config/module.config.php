@@ -30,7 +30,7 @@ return [
             'auth-oauth-service' => 'login-auth-service',
         ],
         'services' => [
-            'auth-oauth-callback' => '/oauth/callback',
+            'auth-oauth-callback' => 'http://localhost/auth/callback',
             'auth-oauth-storage-filename' => __DIR__ . '/../../../data/auth/auth-oauth.txt',
             // override this in /config/autoload/auth-oauth.local.php
             'auth-oauth-config' => [

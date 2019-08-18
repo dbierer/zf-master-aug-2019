@@ -19,6 +19,7 @@ class Module
     }
     public function injectLinks($e)
     {
+        // we need to do this to activate the "Google" button on the main login screen
         $viewModel = $e->getParam('viewModel');
         $viewModel->setVariable('googleLink', 1);
     }
@@ -46,10 +47,11 @@ class Module
                     return new Container(__NAMESPACE__);
                 },
                 //*** OAUTH LAB: assign the google adapter service to AdapterAbstractFactory registered below
-                'auth-oauth-adapter-google' => ???,
+                'auth-oauth-adapter-google' => Factory\AdapterAbstractFactory::class,
             ],
             'abstract_factories' => [
                 //*** OAUTH LAB: register AdapterAbstractFactory here
+                Factory\AdapterAbstractFactory::class,
             ],
         ];
     }

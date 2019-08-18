@@ -48,8 +48,10 @@ return [
     'PrivateMessages',
     //*** ENCRYPTION LAB
     'Encryption',
+    //*** LDAP LAB
+    // 'MyLdap',
     //*** OAUTH LAB
-    // 'AuthOauth',
+    'AuthOauth',
     //*** TRANSLATION LAB
     // 'Translation',
     //*** PSR7BRIDGE LAB

@@ -55,7 +55,8 @@
             "Logging\\": "module/Logging/src/",
             "MyDoctrine\\" : "module/MyDoctrine/src/",
             "Encryption\\": "module/Encryption/src/",
-            "PrivateMessages\\": "module/PrivateMessages/src/"
+            "PrivateMessages\\": "module/PrivateMessages/src/",
+            "AuthOauth\\": "module/AuthOauth/src/"
         }
     },
     "autoload-dev": {

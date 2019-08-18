@@ -48,9 +48,60 @@ class GoogleAdapter extends BaseAdapter
 
         //*** OAUTH LAB: pull in the logic as defined in the PHP League documentation for the Google client
         //*** OAUTH LAB: see the documentation here: https://github.com/thephpleague/oauth2-google
+        $identity = array();
+        if (!empty($_GET['error'])) {
+            // Got an error, probably user denied access
+            throw new Exception($this->formatErrorMessage(__LINE__, self::ERROR_UNKNOWN . htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8')));
+        }
         //*** OAUTH LAB: NOTE: use "$this->session" in place of "$_SESSION"
+        if (empty($_GET['code'])) {
+            // If we don't have an authorization code then get one
+            $authUrl = $this->provider->getAuthorizationUrl();
+            $this->session->oauth2state = $this->provider->getState();
+            $this->session->oauth2state_old = $this->session->oauth2state;
+            header('Location: ' . $authUrl);
+            exit;
+        }
+        if (empty($_GET['state']) || ($_GET['state'] !== $this->session->oauth2state)) {
+            // State is invalid, possible CSRF attack in progress
+            unset($this->session->oauth2state);
+            throw new Exception($this->formatErrorMessage(__LINE__, self::ERROR_INVALID_STATE));
+        }
+        $response = array();
+        // Try to get an access token (using the authorization code grant)
+        $token = $this->provider->getAccessToken('authorization_code', ['code' => $_GET['code']]);
+
+        // Optional: Now you have a token you can look up a users profile data
+        try {
+
+            // We got an access token, let's now get the owner details
+            $response = $this->provider->getResourceOwner($token);
+
+            if (!$response) {
+                throw new Exception(self::ERROR_NO_RESPONSE);
+            }
+
+        } catch (Exception $e) {
+
+            // Failed to get user details
+            throw new Exception($this->formatErrorMessage(__LINE__, self::ERROR_SOMETHING_WRONG . $e->getMessage()));
+
+        }
+
+        $identity = $this->getUserEntity();
+
+        // Use this to interact with an API on the users behalf
+        $identity->setToken($token->getToken());
+
+        // Use this to get a new access token if the old one expires
+        $identity->setRefresh($token->getRefreshToken());
+
+        // Number of seconds until the access token will expire, and need refreshing
+        $identity->setExpiration($token->getExpires());
+
         //*** OAUTH LAB: you can use "setCustomInfo()" with your entity class if desired
         //*** OAUTH LAB: return an AuthOauth\Generic\User entity instance (or an entity class of your own creation)
+        return $this->setCustomInfo($identity, $response);
     }
 
     /**
