@@ -36,7 +36,9 @@
         "zendframework/zend-authentication": "^2.6",
 		"doctrine/orm" : "^2.6",
 		"doctrine/doctrine-orm-module" : "*",
-        "ocramius/proxy-manager": "^2.2"
+        "ocramius/proxy-manager": "^2.2",
+        "league/oauth2-google": "^3.0",
+        "zendframework/zend-debug": "^2.6"
     },
     "autoload": {
         "psr-4": {

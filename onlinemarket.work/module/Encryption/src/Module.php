@@ -20,7 +20,11 @@ class Module
             'factories' => [
                 //*** BLOCK CIPHER LAB: return a block cipher instance
                 'encryption-block-cipher' => function ($container) {
-					$config = $container->get('encryption-get-config-array');
+					// NOTE: this approach first checks to see if the preferred algo is available on this server
+					//       this makes this service portable between servers, but drags down performance to do the extra check
+					// $config = $container->get('encryption-get-config-array');
+					// An alternative is to just hard code the algo and mode:
+					$config = ['algo' => 'aes', 'mode' => 'gcm' ];
                     $cipher = BlockCipher::factory('openssl', $config);
                     $cipher->setKey($container->get('encryption-key'));
                     return $cipher;

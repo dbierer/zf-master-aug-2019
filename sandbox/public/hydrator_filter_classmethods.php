@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../mvc-test/vendor/autoload.php';
+include __DIR__ . '/../../onlinemarket.work/vendor/autoload.php';
 use Zend\Hydrator\ClassMethods;
 
 class Test
@@ -11,6 +11,8 @@ class Test
 
     public function hasOne()   { return $this->one;   }
     public function isTwo()    { return $this->two;   }
+    public function getOne()   { return $this->one;   }
+    public function getTwo()   { return $this->two;   }
     public function getThree() { return $this->three; }
 
 }
