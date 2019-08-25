@@ -32,9 +32,9 @@ class ConfigProvider
             'invokables' => [
             ],
             'factories'  => [
-                Manage\Handler\DeleteHandler::class => Manage\Handler\DeleteHandlerFactory::class,
-                Manage\Handler\ListHandler::class => Manage\Handler\ListHandlerFactory::class,
-                Manage\Domain\ListingsService::class => Manage\Domain\ListingsServiceFactory::class,
+                Handler\DeleteHandler::class => Handler\DeleteHandlerFactory::class,
+                Handler\ListHandler::class => Handler\ListHandlerFactory::class,
+                Domain\ListingsService::class => Domain\ListingsServiceFactory::class,
             ],
         ];
     }
@@ -46,7 +46,7 @@ class ConfigProvider
     {
         return [
             'paths' => [
-                'manage'    => [__DIR__ . '/../templates/'],
+                'manage'    => [__DIR__ . '/../templates'],
             ],
         ];
     }

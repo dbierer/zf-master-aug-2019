@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace Manage\Handler;
 
+use ArrayObject;
 use Manage\Domain\ListingsService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,9 +29,20 @@ class ListHandler implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request) : ResponseInterface
     {
-        $message = '';
         $page = $request->getAttributes()['page'] ?? 0;
-        $listings = $this->service->fetchAllPaginated(self::LINES_PER_PAGE, $page * self::LINES_PER_PAGE);
-        return new HtmlResponse($this->renderer->render('manage::list', ['listings' => $listings, 'message' => $message]));
+        $listings = $this->service->fetchAllPaginated(self::LINES_PER_PAGE, $page * self::LINES_PER_PAGE)->toArray();
+        $count = count($listings);
+        if ($count < self::LINES_PER_PAGE) {
+            $backFill = self::LINES_PER_PAGE - $count;
+            for ($x = 0; $x < $backFill; $x++) {
+                $listings[] = new ArrayObject(['title' => '', 'listings_id' => 0]);
+            }
+        }
+        $next = $page + 1;
+        $prev = (($page - 1) > 0) ? $page - 1 : 0;
+        $body = $this->renderer->render(
+            'manage::list',
+            ['listings' => $listings, 'prev' => $prev, 'next' => $next, 'url' => '/list']);
+        return new HtmlResponse($body);
     }
 }

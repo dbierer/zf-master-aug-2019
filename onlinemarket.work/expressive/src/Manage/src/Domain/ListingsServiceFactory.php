@@ -8,6 +8,6 @@ class ListingsServiceFactory
 {
     public function __invoke(ContainerInterface $container) : ListingsService
     {
-        return new ListingsService($container->get(ContainerInterface::class));
+        return new ListingsService($container);
     }
 }

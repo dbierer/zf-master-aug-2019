@@ -11,7 +11,7 @@ class ListHandlerFactory
     public function __invoke(ContainerInterface $container) : ListHandler
     {
         $template = $container->get(TemplateRendererInterface::class);
-        $table    = $container->get(ListingsService::class);
-        return new ListHandler();
+        $service  = $container->get(ListingsService::class);
+        return new ListHandler($template, $service);
     }
 }

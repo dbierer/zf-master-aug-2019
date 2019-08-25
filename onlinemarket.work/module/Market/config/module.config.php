@@ -160,8 +160,9 @@ return [
     ],
     'navigation' => [
         'default' => [
-            'market-home' => ['label' => 'Home', 'order' => -100, 'route' => 'market', 'resource' => 'menu-market-index'],
-            'market-post' => ['label' => 'Post', 'route' => 'market/post', 'resource' => 'menu-market-post'],
+            'market-home'   => ['label' => 'Home', 'order' => -100, 'route' => 'market', 'resource' => 'menu-market-index'],
+            'market-post'   => ['label' => 'Post', 'route' => 'market/post', 'resource' => 'menu-market-post'],
+            'market-manage' => ['label' => 'Manage', 'uri' => 'http://localhost:9999', 'resource' => 'menu-market-manage'],
         ],
     ],
     'access-control-config' => [
@@ -171,6 +172,7 @@ return [
             'market-post' => 'Market\Controller\PostController',
             'menu-market-index' => 'menu-market-index',
             'menu-market-post'  => 'menu-market-post',
+            'menu-market-manage'  => 'menu-market-manage',
         ],
         'rights' => [
             'guest' => [
@@ -181,6 +183,9 @@ return [
             'user' => [
                 'market-post' => ['allow' => NULL],
                 'menu-market-post' => ['allow' => NULL],
+            ],
+            'admin' => [
+                'menu-market-manage' => ['allow' => NULL],
             ],
         ],
     ],
