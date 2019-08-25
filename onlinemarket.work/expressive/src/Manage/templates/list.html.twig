@@ -1,0 +1,32 @@
+{% block title %}Online Market Management{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Online Market List</h2>
+            <hr>
+            <div class="row">
+                <div class="col-md-8">Title</div>
+                <div class="col-md-4">Delete?</div>
+            </div>
+            <form action="/delete" method="post">
+            {% for entry in listings %}
+                <div class="row">
+                    <div class="col-md-8">{{ entry.title }}</div>
+                    <div class="col-md-2"><input type=checkbox value={{ entry.listings_id }} />Y</div>
+                </div>
+            {% endfor %}
+            </form>
+            <div class="row">
+                <div class="col-md-8">&nbsp;</div>
+                <div class="col-md-4"><input type="submit" value="Process" /></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        {{ message }}
+        </div>
+    </div>
+
+{% endblock %}
