@@ -7,7 +7,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
 return [
     'navigation' => [
         'default' => [
-            'manage' => ['label' => 'Manage', 'route' => 'manage', 'resource' => 'menu-manage']
+            'manage' => ['label' => 'Manage', 'route' => 'manage', 'resource' => 'menu-manage'],
         ]
     ],
     'router' => [

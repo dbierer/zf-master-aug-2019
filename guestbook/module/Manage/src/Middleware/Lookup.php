@@ -3,8 +3,9 @@ namespace Manage\Middleware;
 
 use PDO;
 use Zend\Diactoros\Response;
-use Interop\Http\ServerMiddleware\ {MiddlewareInterface,DelegateInterface};
-use Psr\Http\Message\ {ServerRequestInterface, ResponseInterface};
+use Interop\Http\ServerMiddleware\DelegateInterface;
+use Interop\Http\ServerMiddleware\MiddlewareInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Lookup implements MiddlewareInterface
 {

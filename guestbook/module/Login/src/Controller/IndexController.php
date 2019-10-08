@@ -13,35 +13,35 @@ use Zend\Authentication\Adapter\AdapterInterface;
 
 class IndexController extends AbstractActionController
 {
-    
+
     use SessionTrait;
-    
+
     const LOGIN_INIT    = '<b style="color:gray;">Please requested login information</b>';
     const LOGIN_SUCCESS = '<b style="color:green;">Login was successful</b>';
     const LOGIN_FAIL    = '<b style="color:red;">Login failed</b>';
     const FORM_INVALID  = '<b style="color:orange;">There were invalid form entries: please review error messages</b>';
     const REG_SUCCESS   = '<b style="color:green;">Registration was successful</b>';
     const REG_FAIL      = '<b style="color:red;">Registration failed</b>';
-    
+
     protected $table;
     protected $loginForm;
     protected $regForm;
     protected $authService;
     protected $authAdapter;
-    
+
     public function indexAction()
     {
-        return new ViewModel(['loginForm' => $this->loginForm, 
+        return new ViewModel(['loginForm' => $this->loginForm,
                               'regForm' => $this->regForm,
                               'message' => '']);
-    }    
+    }
     /**
      * Performs basic login / authentication
-     * 
+     *
      * Additional security suggestions:
      * #1: create a log file of successful and failed login attempts
      * #2: maintain a counter and redirect at random if XXX number of failed login attempts
-     * 
+     *
      */
     public function loginAction()
     {
@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
             $this->sessionContainer->message = $message;
         }
         $message = $message ?? $this->sessionContainer->message ?? '';
-        $viewModel = new ViewModel(['loginForm' => $this->loginForm, 
+        $viewModel = new ViewModel(['loginForm' => $this->loginForm,
                                     'regForm' => $this->regForm,
                                     'message' => $message]);
         $viewModel->setTemplate('login/index/index');
@@ -87,7 +87,7 @@ class IndexController extends AbstractActionController
         $this->authService->clearIdentity();
         $this->sessionManager->destroy();
         return $this->redirect()->toRoute('login');
-    }    
+    }
     public function registerAction()
     {
         $message = '';
@@ -106,7 +106,7 @@ class IndexController extends AbstractActionController
                 }
             }
         }
-        $viewModel = new ViewModel(['loginForm' => $this->loginForm, 
+        $viewModel = new ViewModel(['loginForm' => $this->loginForm,
                                     'regForm' => $this->regForm,
                                     'message' => $message]);
         $viewModel->setTemplate('login/index/index');
@@ -122,11 +122,11 @@ class IndexController extends AbstractActionController
     public function setLoginForm(LoginForm $form)
     {
         $this->loginForm = $form;
-    }    
+    }
     public function setRegForm(RegForm $form)
     {
         $this->regForm = $form;
-    }    
+    }
     public function setAuthService(AuthenticationService $svc)
     {
         $this->authService = $svc;

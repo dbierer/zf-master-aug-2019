@@ -27,7 +27,7 @@ class Module
         return [
             'services' => [
                 'private-messages-key' => 'AXee4aivHieQuei8Ophao8Ooda7AhbiX',
-                'private-messages-algo' => 'aes-256-gcm',
+                'private-messages-algo' => 'aes-256-ctr',
             ],
             'factories' => [
                 'private-messages-block-cipher' =>
