@@ -29,12 +29,11 @@ class ConfigProvider
     public function getDependencies() : array
     {
         return [
-            'invokables' => [
-            ],
             'factories'  => [
                 Handler\DeleteHandler::class => Handler\DeleteHandlerFactory::class,
                 Handler\ListHandler::class => Handler\ListHandlerFactory::class,
                 Domain\ListingsService::class => Domain\ListingsServiceFactory::class,
+				Handler\TestHandler::class => Manage\Handler\TestHandlerFactory::class,
             ],
         ];
     }
